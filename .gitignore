@@ -1,0 +1,4 @@
+node_modules
+.env
+prisma/
+!prisma/schema.prisma
