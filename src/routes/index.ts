@@ -7,7 +7,7 @@ import {
     verifyAccessToken,
     verifyRefreshToken,
 } from "../middlewares/verifyTokens"
-import { logout } from "../auth/logout"
+import { logout, logout_all } from "../auth/logout"
 import { listUsers } from "./users"
 
 const authRouter = express.Router()
@@ -16,6 +16,7 @@ authRouter.post("/auth/login", login)
 authRouter.post("/auth/register", validateRegistrationData, register)
 authRouter.get("/auth/refresh", verifyRefreshToken, refreshAccessToken)
 authRouter.delete("/auth/logout", logout)
+authRouter.delete("/auth/logout_all", logout_all)
 
 const router = express.Router()
 

@@ -46,6 +46,7 @@ export const createUser = async (user: any) => {
 export const getAllUsers = () => {
     return db.user.findMany({
         select: {
+            id: true,
             username: true,
             email: true,
         },

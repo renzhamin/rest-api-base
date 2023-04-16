@@ -1,8 +1,8 @@
-import { findUserByUsername, findUserByUsernameOrEmail } from "../db/users"
 import bcrypt from "bcrypt"
-import { genAccessToken, genRefreshToken } from "../utils/genToken"
 import { randomUUID } from "crypto"
 import { addRefreshToken } from "../db/tokens"
+import { findUserByUsernameOrEmail } from "../db/users"
+import { genAccessToken, genRefreshToken } from "../utils/genToken"
 
 export const login = async (req, res) => {
     try {
