@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { deleteAllRefreshTokens, deleteRefreshTokenById } from "../db/tokens"
+import { deleteAllRefreshTokens, deleteRefreshTokenById } from "../../db/tokens"
 
 export const logout = async (req, res) => {
     const refreshToken = req.cookies.refreshToken

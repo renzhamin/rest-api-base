@@ -1,8 +1,6 @@
 import { hashString } from "../utils/hashString"
 import db from "./connect"
 
-// All are async calls
-
 export const findUserByEmail = (email: string) => {
     return db.user.findUnique({
         where: {

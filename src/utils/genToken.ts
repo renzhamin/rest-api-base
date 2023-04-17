@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken"
 
 export const genAccessToken = (user) => {
-    if (!user) return null
-
     const { id, username, email } = user
 
     const accessToken = jwt.sign(

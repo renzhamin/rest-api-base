@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto"
-import { addRefreshToken, deleteRefreshTokenById } from "../db/tokens"
-import { genAccessToken, genRefreshToken } from "../utils/genToken"
+import { addRefreshToken, deleteRefreshTokenById } from "../../db/tokens"
+import { genAccessToken, genRefreshToken } from "../../utils/genToken"
 
 const rotateRefreshToken = async (user: any) => {
     const newTokenId = randomUUID()

@@ -1,6 +1,10 @@
-import { getAllUsers } from "../db/users"
+import express from "express"
 
-export const listUsers = async (req, res) => {
-    const users = await getAllUsers()
-    res.json({ users })
-}
+import { verifyAccessToken } from "../middlewares/verifyTokens"
+import { listUsers } from "../controllers/users"
+
+const router = express.Router()
+
+router.use("/users", verifyAccessToken, listUsers)
+
+export { router as userRouter }
