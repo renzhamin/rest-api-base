@@ -7,7 +7,6 @@ export const register = async (req, res) => {
             username: user.username,
             email: user.email,
         }
-
         res.json({ data })
     } catch (error) {
         res.json({ error: "Registration Failed" })

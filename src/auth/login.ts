@@ -9,11 +9,9 @@ export const login = async (req, res) => {
         const username = req.body.username || ""
         const password = req.body.password || ""
 
-        const user = await findUserByUsernameOrEmail(username, username).catch(
-            (e) => {
-                return res.status(404).json({ error: "User Not Found" })
-            }
-        )
+        const user = await findUserByUsernameOrEmail(username, username)
+
+        if (!user) return res.status(404).json({ error: "User Not Found" })
 
         const match = await bcrypt.compare(password, user.password)
 
