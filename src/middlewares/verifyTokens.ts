@@ -5,7 +5,11 @@ export const verifyAccessToken = (req, res, next) => {
     const token = authHeader && authHeader.split(" ")[1]
     if (token == null) return res.sendStatus(401)
     const user = validateAccessToken(token)
-    if (!user) return res.status(401).json({ error: "Invalid Access token" })
+    if (user.tokenError)
+        return res.status(401).json({
+            error: "Invalid Access token",
+            tokenError: user.tokenError,
+        })
 
     req.user = user
     return next()

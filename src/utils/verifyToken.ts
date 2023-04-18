@@ -2,13 +2,13 @@ import jwt from "jsonwebtoken"
 import { tokenExistsInDb } from "../db/tokens"
 
 export const validateAccessToken = (accessToken: string) => {
-    let user: any = null
+    let user: any = {}
     jwt.verify(
         accessToken,
         process.env.ACCESS_TOKEN_SECRET!,
         (err, decoded) => {
-            if (err) return null
-            user = decoded
+            if (err) user.tokenError = err.name
+            else user = decoded
         }
     )
     return user
