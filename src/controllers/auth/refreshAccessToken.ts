@@ -5,8 +5,8 @@ import { genAccessToken, genRefreshToken } from "../../utils/genToken"
 const rotateRefreshToken = async (user: any) => {
     const newTokenId = randomUUID()
     const newRefreshToken = genRefreshToken(user, newTokenId)
-    await deleteRefreshTokenById(user.jwtid)
-    await addRefreshToken(newTokenId, user.id, newRefreshToken!)
+    deleteRefreshTokenById(user.jwtid)
+    addRefreshToken(newTokenId, user.id, newRefreshToken!)
     return newRefreshToken
 }
 

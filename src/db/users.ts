@@ -1,7 +1,7 @@
 import { hashString } from "../utils/hashString"
 import db from "./connect"
 
-export const findUserByEmail = (email: string) => {
+export const findUserByEmail = async (email: string) => {
     return db.user.findUnique({
         where: {
             email,
@@ -9,7 +9,7 @@ export const findUserByEmail = (email: string) => {
     })
 }
 
-export const findUserById = (id: number) => {
+export const findUserById = async (id: number) => {
     return db.user.findUnique({
         where: {
             id,
@@ -17,7 +17,7 @@ export const findUserById = (id: number) => {
     })
 }
 
-export const findUserByUsername = (username: string) => {
+export const findUserByUsername = async (username: string) => {
     return db.user.findUnique({
         where: {
             username,
@@ -25,7 +25,10 @@ export const findUserByUsername = (username: string) => {
     })
 }
 
-export const findUserByUsernameOrEmail = (username: string, email: string) => {
+export const findUserByUsernameOrEmail = async (
+    username: string,
+    email: string
+) => {
     return db.user.findFirst({
         where: {
             OR: [{ email }, { username }],
@@ -41,7 +44,7 @@ export const createUser = async (user: any) => {
     })
 }
 
-export const getAllUsers = () => {
+export const getAllUsers = async () => {
     return db.user.findMany({
         select: {
             id: true,

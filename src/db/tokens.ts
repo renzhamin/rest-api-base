@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 
 // All async calls
 
-export const findRefreshTokenById = (id: string) => {
+export const findRefreshTokenById = async (id: string) => {
     return db.refreshToken.findUnique({
         where: {
             id,
@@ -12,7 +12,7 @@ export const findRefreshTokenById = (id: string) => {
     })
 }
 
-export const deleteRefreshTokenById = (id: string) => {
+export const deleteRefreshTokenById = async (id: string) => {
     return db.refreshToken.delete({
         where: {
             id,
@@ -20,7 +20,7 @@ export const deleteRefreshTokenById = (id: string) => {
     })
 }
 
-export const deleteAllRefreshTokens = (id: number) => {
+export const deleteAllRefreshTokens = async (id: number) => {
     return db.refreshToken.deleteMany({
         where: {
             user: {

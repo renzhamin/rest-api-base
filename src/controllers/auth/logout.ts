@@ -9,7 +9,7 @@ export const logout = async (req, res) => {
     const user: any = jwt.decode(refreshToken)
 
     if (user) {
-        await deleteRefreshTokenById(user.jwtid)
+        deleteRefreshTokenById(user.jwtid)
         return res.sendStatus(200)
     }
 
@@ -24,7 +24,7 @@ export const logout_all = async (req, res) => {
     const user: any = jwt.decode(refreshToken)
 
     if (user) {
-        await deleteAllRefreshTokens(user.id)
+        deleteAllRefreshTokens(user.id)
         return res.sendStatus(200)
     }
 
