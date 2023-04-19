@@ -1,5 +1,5 @@
 node_modules
-.env
 prisma/**
 !prisma/schema.prisma
+tests/cookie.txt
 test.ts
