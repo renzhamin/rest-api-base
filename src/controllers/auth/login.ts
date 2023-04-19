@@ -6,9 +6,14 @@ import { genAccessToken, genRefreshToken } from "../../utils/genToken"
 
 export const login = async (req, res) => {
     try {
-        const username = req.body.username || ""
-        const password = req.body.password || ""
+        if (!req.body.username)
+            return res.status(400).json({ error: "No Username provided" })
+        if (!req.body.password)
+            return res.status(400).json({ error: "No Password provided" })
 
+        const { username, password } = req.body
+
+        // User can log in with username or email
         const user = await findUserByUsernameOrEmail(username, username)
 
         if (!user) return res.status(404).json({ error: "User Not Found" })
@@ -23,9 +28,10 @@ export const login = async (req, res) => {
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            maxAge: 24 * 60 * 60 * 30 * 1000,
+            maxAge: 24 * 60 * 60 * 30 * 1000, // 30 days
         })
 
+        // add the token to the database
         addRefreshToken(tokenId, user.id, refreshToken)
 
         return res.json({ accessToken })
