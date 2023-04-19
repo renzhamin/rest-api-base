@@ -1,5 +1,5 @@
 node_modules
 .env
-prisma/
+prisma/**
 !prisma/schema.prisma
 test.ts

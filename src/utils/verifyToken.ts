@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken"
 import { tokenExistsInDb } from "../db/tokens"
 
-export const validateAccessToken = (accessToken: string) => {
+const tokenVerifier: any = {}
+
+tokenVerifier.validateAccessToken = (accessToken: string) => {
     let user: any = {}
     jwt.verify(
         accessToken,
@@ -14,21 +16,28 @@ export const validateAccessToken = (accessToken: string) => {
     return user
 }
 
-export const validateRefreshToken = async (refreshToken: string) => {
-    let user: any = null
+tokenVerifier.verifyRefreshToken = (refreshToken: string) => {
+    let user: any = {}
     jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET!,
         (err, decoded) => {
-            if (err) return null
-            user = decoded
+            if (err) user.tokenError = err.name
+            else user = decoded
         }
     )
+    return user
+}
 
-    if (!user) return null
+tokenVerifier.validateRefreshToken = async (refreshToken: string) => {
+    const user = await tokenVerifier.verifyRefreshToken(refreshToken)
+
+    if (user.tokenError) return user
 
     const tokenExists = await tokenExistsInDb(user.jwtid, refreshToken)
 
-    if (!tokenExists) return null
+    if (!tokenExists) user.tokenError = "OldToken"
     return user
 }
+
+export default tokenVerifier

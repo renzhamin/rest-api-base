@@ -1,10 +1,11 @@
-import { validateAccessToken, validateRefreshToken } from "../utils/verifyToken"
+import tokenVerifier from "../utils/verifyToken"
+import jwt from "jsonwebtoken"
 
 export const verifyAccessToken = (req, res, next) => {
     const authHeader = req.headers["authorization"]
     const token = authHeader && authHeader.split(" ")[1]
     if (token == null) return res.sendStatus(401)
-    const user = validateAccessToken(token)
+    const user = tokenVerifier.validateAccessToken(token)
     if (user.tokenError)
         return res.status(401).json({
             error: "Invalid Access token",
@@ -20,9 +21,14 @@ export const verifyRefreshToken = async (req, res, next) => {
     if (!refreshToken)
         return res.status(401).json({ error: "No refresh token" })
 
-    const user = await validateRefreshToken(refreshToken)
+    const user = await tokenVerifier.validateRefreshToken(refreshToken)
 
-    if (!user) return res.status(401).json({ error: "Invalid Refresh Token" })
+    if (user.tokenError)
+        return res.status(401).json({
+            error: "Invalid Refresh Token",
+            tokenError: user.tokenError,
+        })
+
     req.user = user
 
     return next()

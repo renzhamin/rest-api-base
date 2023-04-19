@@ -20,7 +20,7 @@ export const deleteRefreshTokenById = async (id: string) => {
     })
 }
 
-export const deleteAllRefreshTokens = async (id: number) => {
+export const deleteAllRefreshTokens = async (id: string) => {
     return db.refreshToken.deleteMany({
         where: {
             user: {
@@ -32,7 +32,7 @@ export const deleteAllRefreshTokens = async (id: number) => {
 
 export const addRefreshToken = async (
     id: string,
-    userId: number,
+    userId: string,
     refreshToken: string
 ) => {
     const hashedToken = await hashString(refreshToken)

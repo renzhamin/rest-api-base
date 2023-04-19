@@ -36,6 +36,6 @@ export const login = async (req, res) => {
 
         return res.json({ accessToken })
     } catch (error) {
-        return res.status(404).json({ error: "Internal Error" })
+        return res.status(500).json({ error: "Internal Error" })
     }
 }

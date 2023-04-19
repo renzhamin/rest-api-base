@@ -9,7 +9,7 @@ export const findUserByEmail = async (email: string) => {
     })
 }
 
-export const findUserById = async (id: number) => {
+export const findUserById = async (id: string) => {
     return db.user.findUnique({
         where: {
             id,
