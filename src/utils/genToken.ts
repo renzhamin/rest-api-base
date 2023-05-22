@@ -7,6 +7,7 @@ export const genAccessToken = (user) => {
         { id, username, email },
         process.env.ACCESS_TOKEN_SECRET!,
         {
+            algorithm: "HS256",
             expiresIn: "5m",
         }
     )
@@ -22,6 +23,7 @@ export const genRefreshToken = (user, tokenId: string) => {
         { jwtid: tokenId, id, username, email },
         process.env.REFRESH_TOKEN_SECRET!,
         {
+            algorithm: "HS256",
             expiresIn,
         }
     )

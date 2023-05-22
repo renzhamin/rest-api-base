@@ -8,6 +8,7 @@ tokenVerifier.validateAccessToken = (accessToken: string) => {
     jwt.verify(
         accessToken,
         process.env.ACCESS_TOKEN_SECRET!,
+        { algorithms: ["HS256"] },
         (err, decoded) => {
             if (err) user.tokenError = err.name
             else user = decoded
@@ -21,6 +22,7 @@ tokenVerifier.verifyRefreshToken = (refreshToken: string) => {
     jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET!,
+        { algorithms: ["HS256"] },
         (err, decoded) => {
             if (err) user.tokenError = err.name
             else user = decoded
