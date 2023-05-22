@@ -3,32 +3,21 @@ import { tokenExistsInDb } from "../db/tokens"
 
 const tokenVerifier: any = {}
 
-tokenVerifier.validateAccessToken = (accessToken: string) => {
+const verifyToken = (token: string, secret) => {
     let user: any = {}
-    jwt.verify(
-        accessToken,
-        process.env.ACCESS_TOKEN_SECRET!,
-        { algorithms: ["HS256"] },
-        (err, decoded) => {
-            if (err) user.tokenError = err.name
-            else user = decoded
-        }
-    )
+    jwt.verify(token, secret, { algorithms: ["HS256"] }, (err, decoded) => {
+        if (err) user.tokenError = err.name
+        else user = decoded
+    })
     return user
 }
 
+tokenVerifier.validateAccessToken = (accessToken: string) => {
+    return verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET!)
+}
+
 tokenVerifier.verifyRefreshToken = (refreshToken: string) => {
-    let user: any = {}
-    jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET!,
-        { algorithms: ["HS256"] },
-        (err, decoded) => {
-            if (err) user.tokenError = err.name
-            else user = decoded
-        }
-    )
-    return user
+    return verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET!)
 }
 
 tokenVerifier.validateRefreshToken = async (refreshToken: string) => {
