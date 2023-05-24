@@ -53,3 +53,11 @@ export const getAllUsers = async () => {
         },
     })
 }
+
+export const updatePassword = async (userId: string, newPassword: string) => {
+    const password = await hashString(newPassword)
+    return db.user.update({
+        where: { id: userId },
+        data: { password: password },
+    })
+}

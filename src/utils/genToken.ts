@@ -24,3 +24,7 @@ export const genAccessToken = (user) => {
 export const genRefreshToken = (user, tokenId: string) => {
     return genToken(user, process.env.REFRESH_TOKEN_SECRET!, "30d", tokenId)
 }
+
+export const genPassResetToken = (user) => {
+    return genToken(user, process.env.PASSWORD_RESET_TOKEN_SECRET!, "2m")
+}

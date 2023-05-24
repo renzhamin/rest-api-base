@@ -3,7 +3,7 @@ import { tokenExistsInDb } from "../db/tokens"
 
 const tokenVerifier: any = {}
 
-const verifyToken = (token: string, secret) => {
+const verifyToken = (token: string, secret: string) => {
     let user: any = {}
     jwt.verify(token, secret, { algorithms: ["HS256"] }, (err, decoded) => {
         if (err) user.tokenError = err.name
@@ -18,6 +18,10 @@ tokenVerifier.validateAccessToken = (accessToken: string) => {
 
 tokenVerifier.verifyRefreshToken = (refreshToken: string) => {
     return verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET!)
+}
+
+tokenVerifier.validatePasswordResetToken = (token: string) => {
+    return verifyToken(token, process.env.PASSWORD_RESET_TOKEN_SECRET!)
 }
 
 tokenVerifier.validateRefreshToken = async (refreshToken: string) => {
