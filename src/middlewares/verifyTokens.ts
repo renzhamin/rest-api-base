@@ -15,7 +15,6 @@ export const verifyAccessToken = (req, res, next) => {
     return next()
 }
 
-
 export const verifyRefreshToken = async (req, res, next) => {
     const refreshToken = req.cookies.refreshToken
     if (!refreshToken)
@@ -34,10 +33,10 @@ export const verifyRefreshToken = async (req, res, next) => {
     return next()
 }
 
-export const verifyPasswordResetToken = (req, res, next) => {
+export const verifyPassResetToken = (req, res, next) => {
     const token = req.params.token
-    if (token == null) return res.send(401).json({error : "No token provided"})
-    const user = tokenVerifier.validatePasswordResetToken(token)
+    if (token == null) return res.send(401).json({ error: "No token provided" })
+    const user = tokenVerifier.validatePassResetToken(token)
     if (user.tokenError)
         return res.status(401).json({
             error: "Invalid Password Reset token",
@@ -47,4 +46,3 @@ export const verifyPasswordResetToken = (req, res, next) => {
     req.user = user
     return next()
 }
-

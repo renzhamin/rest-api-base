@@ -20,8 +20,8 @@ tokenVerifier.verifyRefreshToken = (refreshToken: string) => {
     return verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET!)
 }
 
-tokenVerifier.validatePasswordResetToken = (token: string) => {
-    return verifyToken(token, process.env.PASSWORD_RESET_TOKEN_SECRET!)
+tokenVerifier.validatePassResetToken = (token: string) => {
+    return verifyToken(token, process.env.PASS_RESET_TOKEN_SECRET!)
 }
 
 tokenVerifier.validateRefreshToken = async (refreshToken: string) => {

@@ -32,9 +32,8 @@ export const getPassResetLink = async (req, res) => {
         const token = genPassResetToken(user)
         const url = req.protocol + "://" + req.get("host") + req.originalUrl
         const resetLink = `<a target='_blank' href='${url}/${user.id}/${token}'>Password Reset Link</a>`
-        res.send(resetLink)
-        /* sendEmail(req.body.email, "Reset Password", resetLink) */
-        /* res.json({ msg: "Password Reset Link sent to email" }) */
+        sendEmail(req.body.email, "Reset Password", resetLink)
+        res.json({ msg: "Password Reset Link sent to email" })
     } catch (error) {
         res.status(500).json({ msg: "Failed to send email" })
     }
