@@ -1,6 +1,6 @@
-This repo is meant to demonstrate how authentication and authorization can be done in a rest api using jsonwebtoken.
+This repo is meant to demonstrate how to implement password reset functionality with jwt
 
-You can read the full tutorial [here](https://dev.to/renzhamin/authenticate-and-protect-rest-api-routes-with-jwt-and-refersh-token-rotation-1lg5)
+You can read the full tutorial [here](https://dev.to/renzhamin/resetforgot-password-on-a-rest-api-with-jsonwebtoken-jwt-in-express-6i9)
 
 To get started,
 
